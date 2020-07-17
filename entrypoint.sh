@@ -12,21 +12,22 @@ fi
 echo "Send github action event to datadog"
 echo
 
-sendEvent() {
-    local messageTitle="${1}"
-    local message="${2}"
-    local env="${3}"
-    local workflow="${4}"
-    local datadogUrl="https://api.datadoghq.eu/api/v1/events?api_key=${5}"
-    local alertType="${6}"
-    if [ -z "$alertType" ]
-        then
-            echo "No argument for alert type supplied - setting it to 'info'"
-            alertType="info"
-    fi
-    curl  -X POST -H "Content-type: application/json" \
-    -d "{\"title\": \"${messageTitle}\",\"text\": \"${message}\",\"priority\": \"normal\",\"tags\": \"[workflow:${workflow},env:${env}]\",\"alert_type\": \"${alertType}\",\"source_type_name\": \"GITHUB\"}" \
-     "${datadogUrl}"
-}
+if [[ -z "$EVENT_TEXT" || -z "$MESSAGE_TITLE" || -z "$ENV" || -z "$WORKFLOW" || -z "$DATADOG_API_KEY" ]]; then
+  echo "One or more required variables are missing: DATADOG_API_KEY, EVENT_TITLE, EVENT_TEXT"
+  exit 1
+fi
 
-sendEvent "${1}" "${2}" "${3}" "${4}" "${5}" "${6}"
+if [[ -z "$EVENT_PRIORITY" ]]; then
+  # normal or low
+  EVENT_PRIORITY="normal"
+fi
+
+if [[ -z "$EVENT_ALERT_TYPE" ]]; then
+  # error, warning, info, and success.
+  EVENT_ALERT_TYPE="info"
+fi
+
+DATADOG_URL="https://api.datadoghq.eu/api/v1/events?api_key=$DATADOG_API_KEY"
+curl  -X POST -H "Content-type: application/json" \
+-d "{\"title\": \"${EVENT_TITLE}\",\"text\": \"${EVENT_TEXT}\",\"priority\": \"normal\",\"tags\": \"[workflow:${WORKFLOW},env:${ENV}]\",\"alert_type\": \"${EVENT_ALERT_TYPE}\",\"source_type_name\": \"GITHUB\"}" \
+    "${DATADOG_URL}"
