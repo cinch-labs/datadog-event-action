@@ -1,16 +1,8 @@
-FROM debian:9.6-slim
+# Container image that runs your code
+FROM alpine:3.10
 
-LABEL "com.github.actions.name"="DataDog Event Trigger (eu)"
-LABEL "com.github.actions.description"="Trigger DataDog Events from GitHub Actions"
-LABEL "com.github.actions.icon"="hash"
-LABEL "com.github.actions.color"="gray-dark"
+# Copies your code file from your action repository to the filesystem path `/` of the container
+COPY entrypoint.sh /entrypoint.sh
 
-LABEL version="1.0.0"
-LABEL repository="https://github.com/cinch-labs/datadog-event-action"
-LABEL homepage="https://github.com/cinch-labs/datadog-event-action"
-LABEL maintainer="Cinch labs"
-
-RUN apt-get update && apt-get install -y curl
-
-ADD entrypoint.sh /entrypoint.sh
+# Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT ["/entrypoint.sh"]

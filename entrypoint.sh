@@ -1,33 +1,36 @@
-#!/bin/bash
-set -e
+#!/bin/sh -l
 
-if [ $# -lt 5 ]; then
-    echo "Usage:"
-    echo -e "\t./send-github-action-event.sh \"Message Title\" \"Build successeded for feature branch\" \"production\" \"pull-request\" <dd-api-key> \"warning\" (optional)"
-    echo "#3 can be one of production, uat, dev, or <NORMALISED_BRANCH_NAME>"
-    echo "#4 is the name of the workflow logging the event"
-    echo "#6 can be one of error, warning, info, or success. Default: info"
-    exit 1
-fi
-echo "Send github action event to datadog"
-echo
+echo "Hello $1"
+time=$(date)
+echo "::set-output name=time::$time"
 
-if [[ -z "$EVENT_TEXT" || -z "$MESSAGE_TITLE" || -z "$ENV" || -z "$WORKFLOW" || -z "$DATADOG_API_KEY" ]]; then
-  echo "One or more required variables are missing: DATADOG_API_KEY, EVENT_TITLE, EVENT_TEXT"
-  exit 1
-fi
+# #!/bin/bash
+# set -e
 
-if [[ -z "$EVENT_PRIORITY" ]]; then
-  # normal or low
-  EVENT_PRIORITY="normal"
-fi
+# if [ $# -lt 4 ]; then
+#     echo "Usage:"
+#     echo -e "\t./send-github-action-event.sh \"Message Title\" \"Build successeded for feature branch\" \"[workflow:\"pull-request\",branch:\"${NORMALISED_BRANCH_NAME}\",env:\"${CINCH_ENVIRONMENT}\" <dd-api-key> \"warning\" (optional)"
+#     echo "'env' can be one of production, uat, development, or <NORMALISED_BRANCH_NAME>"
+#     echo "'workflow' is the name of the workflow logging the event"
+#     echo "#5 can be one of error, warning, info, or success. Default: info"
+#     exit 1
+# fi
+# echo "Send github action event to datadog"
+# echo
 
-if [[ -z "$EVENT_ALERT_TYPE" ]]; then
-  # error, warning, info, and success.
-  EVENT_ALERT_TYPE="info"
-fi
+# sendEvent() {
+#     local messageTitle="${1}"
+#     local message="${2}"
+#     local tags="${3}"
+#     local datadogUrl="https://api.datadoghq.eu/api/v1/events?api_key=${4}"
+#     local alertType="${5}"
+#     if [ -z "$alertType" ]; then
+#         echo "No argument for alert type supplied - setting it to 'info'"
+#         alertType="info"
+#     fi
+#     curl -X POST -H "Content-type: application/json" \
+#         -d "{\"title\": \"${messageTitle}\",\"text\": \"${message}\",\"priority\": \"normal\",\"tags\": \"${tags}\",\"alert_type\": \"${alertType}\",\"source_type_name\": \"GITHUB\"}" \
+#         "${datadogUrl}"
+# }
 
-DATADOG_URL="https://api.datadoghq.eu/api/v1/events?api_key=$DATADOG_API_KEY"
-curl  -X POST -H "Content-type: application/json" \
--d "{\"title\": \"${EVENT_TITLE}\",\"text\": \"${EVENT_TEXT}\",\"priority\": \"normal\",\"tags\": \"[workflow:${WORKFLOW},env:${ENV}]\",\"alert_type\": \"${EVENT_ALERT_TYPE}\",\"source_type_name\": \"GITHUB\"}" \
-    "${DATADOG_URL}"
+# sendEvent "${1}" "${2}" "${3}" "${4}" "${5}"
