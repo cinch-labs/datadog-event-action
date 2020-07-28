@@ -2,15 +2,28 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  message-title:
+    description: 'A title for the datadog event'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  message: 
+    description: 'A datadog event message'
+    required: true
+  tags: 
+    description: 'An array of tags for datadog event (comma seperated, in square brackets)'
+    required: true
+  datadog-api-key: 
+    description: 'The datadog url to send events to'
+    required: true
+  alert-type: 
+    description: 'The datadog url to send events to'
+    required: true
+    default: 'info'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.message-title }}
+    - ${{ inputs.message }}
+    - ${{ inputs.tags }}
+    - ${{ inputs.datadog-api-key }}
+    - ${{ inputs.alert-type }}
