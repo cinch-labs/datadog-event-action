@@ -12,15 +12,17 @@ fi
 echo "Send github action event to datadog"
 echo
 
-messageTitle="${1}"
-message="${2}"
-tags="${3}"
-datadogUrl="https://api.datadoghq.eu/api/v1/events?api_key=${4}"
-alertType="${5}"
-echo messageTitle
-echo message
-echo tags
-echo alertType
+messageTitle=$1
+message=$2
+tags=$3
+datadogUrlBase="https://api.datadoghq.eu/api/v1/events?api_key="
+datadogUrl="${datadogUrlBase}${4}"
+alertType=$5
+echo "messageTitle=$messageTitle"
+echo "message=$message"
+echo "tags=$tags"
+echo "datadogUrlBase=$datadogUrlBase"
+echo "alertType=$alertType"
 
 if [ -z "$alertType" ]; then
     echo "No argument for alert type supplied - setting it to 'info'"
