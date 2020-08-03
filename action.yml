@@ -1,6 +1,6 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Send event to datadog'
+description: 'Send event to datadog'
 inputs:
   message-title:
     description: 'A title for the datadog event'
@@ -15,7 +15,7 @@ inputs:
     description: 'The datadog url to send events to'
     required: true
   alert-type: 
-    description: 'The datadog url to send events to'
+    description: 'The alert type to set the event to'
     required: true
     default: 'info'
 runs:
