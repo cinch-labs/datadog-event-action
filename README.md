@@ -1,6 +1,8 @@
 # datadog-event-action
 A GitHub Action that triggers DataDog Events
 
+# Latest working version
+Latest version = v1.0.6
 
 # Update latest
 
