@@ -20,7 +20,7 @@ datadogUrl="${datadogUrlBase}${4}"
 alertType="$5"
 #echo "messageTitle=$messageTitle"
 #echo "message=$message"
-#echo "tags=$tags"
+echo "tags=$tags"
 #echo "datadogUrlBase=$datadogUrlBase"
 #echo "alertType=$alertType"
 #echo "{\"title\": \"${messageTitle}\",\"text\": \"${message}\",\"priority\": \"normal\",\"tags\": \"${tags}\",\"alert_type\": \"${alertType}\",\"source_type_name\": \"GITHUB\"}" \
