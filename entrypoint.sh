@@ -39,4 +39,4 @@ curl -X POST -H "Content-type:application/json" \
             "alert_type": "'"${alertType}"'",
             "source_type_name": "GITHUB"
 }' \
-"'"${datadogUrl}"'"
+"${datadogUrl}"
