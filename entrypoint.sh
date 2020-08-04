@@ -23,6 +23,8 @@ echo "message=$message"
 echo "tags=$tags"
 echo "datadogUrlBase=$datadogUrlBase"
 echo "alertType=$alertType"
+echo "{\"title\": \"${messageTitle}\",\"text\": \"${message}\",\"priority\": \"normal\",\"tags\": \"${tags}\",\"alert_type\": \"${alertType}\",\"source_type_name\": \"GITHUB\"}" \
+"${datadogUrl}"
 
 if [ -z "$alertType" ]; then
     echo "No argument for alert type supplied - setting it to 'info'"
@@ -30,4 +32,4 @@ if [ -z "$alertType" ]; then
 fi
 curl -X POST -H "Content-type: application/json" \
     -d "{\"title\": \"${messageTitle}\",\"text\": \"${message}\",\"priority\": \"normal\",\"tags\": \"${tags}\",\"alert_type\": \"${alertType}\",\"source_type_name\": \"GITHUB\"}" \
-    "${datadogUrl}"
+"${datadogUrl}"
