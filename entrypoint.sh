@@ -18,13 +18,13 @@ tags="$3"
 datadogUrlBase="https://api.datadoghq.eu/api/v1/events?api_key="
 datadogUrl="${datadogUrlBase}${4}"
 alertType="$5"
-echo "messageTitle=$messageTitle"
-echo "message=$message"
-echo "tags=$tags"
-echo "datadogUrlBase=$datadogUrlBase"
-echo "alertType=$alertType"
-echo "{\"title\": \"${messageTitle}\",\"text\": \"${message}\",\"priority\": \"normal\",\"tags\": \"${tags}\",\"alert_type\": \"${alertType}\",\"source_type_name\": \"GITHUB\"}" \
-"${datadogUrl}"
+#echo "messageTitle=$messageTitle"
+#echo "message=$message"
+#echo "tags=$tags"
+#echo "datadogUrlBase=$datadogUrlBase"
+#echo "alertType=$alertType"
+#echo "{\"title\": \"${messageTitle}\",\"text\": \"${message}\",\"priority\": \"normal\",\"tags\": \"${tags}\",\"alert_type\": \"${alertType}\",\"source_type_name\": \"GITHUB\"}" \
+#"${datadogUrl}"
 
 if [ -z "$alertType" ]; then
     echo "No argument for alert type supplied - setting it to 'info'"
