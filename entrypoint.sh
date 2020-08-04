@@ -31,12 +31,5 @@ if [ -z "$alertType" ]; then
     alertType="info"
 fi
 curl -X POST -H "Content-type:application/json" \
--d '{
-            "title": "'"${messageTitle}"'",
-            "text": "'"${message}"'",
-            "priority": "normal",
-            "tags": "'"${tags}"'",
-            "alert_type": "'"${alertType}"'",
-            "source_type_name": "GITHUB"
-}' \
+-d '{"title": "'"${messageTitle}"'", "text": "'"${message}"'", "priority": "normal", "tags": "'"${tags}"'", "alert_type": "'"${alertType}"'", "source_type_name": "GITHUB"}' \
 "${datadogUrl}"
