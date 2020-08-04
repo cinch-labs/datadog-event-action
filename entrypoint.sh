@@ -30,9 +30,7 @@ if [ -z "$alertType" ]; then
     echo "No argument for alert type supplied - setting it to 'info'"
     alertType="info"
 fi
-curl -X POST -H "Content-type: application/json" \
-#-d "{\"title\": \"${messageTitle}\",\"text\": \"${message}\",\"priority\": \"normal\",\"tags\": \"${tags}\",\"alert_type\": \"${alertType}\",\"source_type_name\": \"GITHUB\"}" \
- -d '{
+curl -X POST -H "Content-type: application/json" -d '{
             "title": "'"${messageTitle}"'",
             "text": "'"${message}"'",
             "priority": "normal",
