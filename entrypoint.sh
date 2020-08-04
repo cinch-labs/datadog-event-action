@@ -35,7 +35,7 @@ curl -X POST -H "Content-type:application/json" \
             "title": "'"${messageTitle}"'",
             "text": "'"${message}"'",
             "priority": "normal",
-            "tags": "'"test"'",
+            "tags": "'"["workflow:main","repo:data-dogging","branch:master","env:dev"]"'",
             "alert_type": "'"${alertType}"'",
             "source_type_name": "GITHUB"
 }' \
