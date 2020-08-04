@@ -15,7 +15,7 @@ echo
 messageTitle="$1"
 message="$2"
 tags="$3"
-datadogUrlBase="https://api.datadoghq.eu/api/v1/events?api_key="
+datadogUrlBase="http://api.datadoghq.eu/api/v1/events?api_key="
 datadogUrl="${datadogUrlBase}${4}"
 alertType="$5"
 echo "messageTitle=$messageTitle"
